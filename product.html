@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Comparison with Price Sorting</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #eef2f7;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 28px;
+    }
+
+    .sort-controls {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .sort-controls button {
+        background: #1976d2;
+        border: none;
+        color: #fff;
+        padding: 8px 16px;
+        margin: 0 5px;
+        font-size: 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .sort-controls button:hover {
+        background: #0d47a1;
+    }
+
+    .comparison-table {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .product {
+        background: #fff;
+        width: 260px;
+        padding: 18px;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .product:hover {
+        transform: translateY(-5px);
+    }
+
+    .product.active {
+        border: 3px solid #4CAF50;
+        transform: scale(1.05);
+    }
+
+    .product img {
+        width: 140px;
+        height: 140px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+
+    .price {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 8px 0;
+        color: #333;
+    }
+
+    ul {
+        text-align: left;
+        padding-left: 18px;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+
+    button.buy-btn {
+        background: #4CAF50;
+        border: none;
+        color: #fff;
+        padding: 8px 16px;
+        font-size: 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button.buy-btn:hover {
+        background: #388e3c;
+    }
+</style>
+
+</head>
+<body>
+
+<h2>Product Comparison – Price Sorting</h2>
+
+<div class="sort-controls">
+    <button onclick="sortByPrice('asc')">Price: Low to High</button>
+    <button onclick="sortByPrice('desc')">Price: High to Low</button>
+</div>
+
+<div class="comparison-table">
+
+    <!-- Mobile -->
+    <div class="product" onclick="selectProduct(this)" data-price="14999">
+        <img src="https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SL1500_.jpg" alt="Mobile">
+        <h3>Smartphone</h3>
+        <p class="price">₹14,999</p>
+        <ul>
+            <li>✔ 6.5” Full HD+ Display</li>
+            <li>✔ 50MP Camera</li>
+            <li>✔ 5000mAh Battery</li>
+            <li>✔ 6GB RAM</li>
+        </ul>
+        <button class="buy-btn" onclick="buyNow('https://www.amazon.in/s?k=smartphone')">Buy Mobile</button>
+    </div>
+
+    <!-- Laptop -->
+    <div class="product" onclick="selectProduct(this)" data-price="49999">
+        <img src="https://m.media-amazon.com/images/I/71vFKBpKakL._AC_SL1500_.jpg" alt="Laptop">
+        <h3>Laptop</h3>
+        <p class="price">₹49,999</p>
+        <ul>
+            <li>✔ Intel i5</li>
+            <li>✔ 8GB RAM / 512GB SSD</li>
+            <li>✔ 15.6” FHD Display</li>
+            <li>✔ Lightweight Design</li>
+        </ul>
+        <button class="buy-btn" onclick="buyNow('https://www.amazon.in/s?k=laptop')">Buy Laptop</button>
+    </div>
+
+    <!-- Camera -->
+    <div class="product" onclick="selectProduct(this)" data-price="39999">
+        <img src="https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=500&q=80
+" alt="Camera">
+        <h3>DSLR Camera</h3>
+        <p class="price">₹39,999</p>
+        <ul>
+            <li>✔ 24.1MP Sensor</li>
+            <li>✔ Full HD Recording</li>
+            <li>✔ Interchangeable Lens</li>
+            <li>✔ WiFi + Bluetooth</li>
+        </ul>
+        <button class="buy-btn" onclick="buyNow('https://www.amazon.in/s?k=dslr+camera')">Buy Camera</button>
+    </div>
+
+    <!-- Smartwatch -->
+    <div class="product" onclick="selectProduct(this)" data-price="2499">
+        <img src="https://images.unsplash.com/photo-1516571137133-1be29e37143a?auto=format&fit=crop&w=500&q=80
+" alt="Smartwatch">
+        <h3>Smartwatch</h3>
+        <p class="price">₹2,499</p>
+        <ul>
+            <li>✔ AMOLED Display</li>
+            <li>✔ Sports & Fitness Modes</li>
+            <li>✔ Bluetooth Calling</li>
+            <li>✔ Health Tracking</li>
+        </ul>
+        <button class="buy-btn" onclick="buyNow('https://www.amazon.in/s?k=smartwatch')">Buy Smartwatch</button>
+    </div>
+
+    <!-- Headphones -->
+    <div class="product" onclick="selectProduct(this)" data-price="1999">
+        <img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?auto=format&fit=crop&w=500&q=80
+" alt="Headphones">
+        <h3>Wireless Headphones</h3>
+        <p class="price">₹1,999</p>
+        <ul>
+            <li>✔ Over-Ear Design</li>
+            <li>✔ Powerful Bass</li>
+            <li>✔ 20-Hour Battery</li>
+            <li>✔ Bluetooth 5.0</li>
+        </ul>
+        <button class="buy-btn" onclick="buyNow('https://www.amazon.in/s?k=headphones')">Buy Headphones</button>
+    </div>
+
+</div>
+
+<script>
+function selectProduct(card) {
+    document.querySelectorAll('.product').forEach(p => p.classList.remove('active'));
+    card.classList.add('active');
+}
+
+function buyNow(url) {
+    event.stopPropagation(); // don’t trigger selectProduct when clicking button
+    window.open(url, "_blank");
+}
+
+// Sort cards by data-price
+function sortByPrice(order) {
+    const container = document.querySelector('.comparison-table');
+    const cards = Array.from(container.children);
+
+    cards.sort((a, b) => {
+        const priceA = parseInt(a.dataset.price, 10);
+        const priceB = parseInt(b.dataset.price, 10);
+        return order === 'asc' ? priceA - priceB : priceB - priceA;
+    });
+
+    // Re-append in sorted order
+    cards.forEach(card => container.appendChild(card));
+}
+</script>
+
+</body>
+</html>
